@@ -18,7 +18,51 @@ public class InterpretDrawingFile {
 		JFileChooser chooser = new JFileChooser("resources");
 		chooser.showOpenDialog(null);
 		File f = new File(chooser.getSelectedFile().getPath());
-		Scanner in = new Scanner(f); //making Scanner with a File
-		
+		Scanner in = new Scanner(f); // making Scanner with a File
+		String shapeType = in.next();
+		int redComponent = in.nextInt();
+		int greenComponent = in.nextInt();
+		int blueComponent = in.nextInt();
+		boolean isFilled = in.nextBoolean();
+		double parameterOne = in.nextDouble();
+		double parameterTwo = in.nextDouble();
+		double parameterThree = in.nextDouble();
+		double parameterFour = in.nextDouble();
+		double parameterFive=0;
+		double parameterSix=0;
+		if (in.hasNextDouble()) {
+			parameterFive = in.nextDouble();
+		}
+		if (in.hasNextDouble()) {
+			parameterSix = in.nextDouble();
+		}
+		StdDraw.setPenColor(redComponent, greenComponent, blueComponent);
+		if (shapeType.equals("ellipse")) {
+			if (isFilled) {
+				StdDraw.filledEllipse(parameterOne, parameterTwo, parameterThree, parameterFour);
+			} else {
+				StdDraw.ellipse(parameterOne, parameterTwo, parameterThree, parameterFour);
+			}
+
+		}
+		if (shapeType.equals("rectangle")) {
+			if (isFilled) {
+				StdDraw.filledRectangle(parameterOne, parameterTwo, parameterThree, parameterFour);
+			} else {
+				StdDraw.rectangle(parameterOne, parameterTwo, parameterThree, parameterFour);
+			}
+		}
+		if (shapeType.equals("triangle")) {
+			if (isFilled) {
+				StdDraw.line(parameterOne, parameterTwo, parameterThree, parameterFour);
+				StdDraw.line(parameterThree, parameterFour, parameterFive, parameterSix);
+				StdDraw.line(parameterFive, parameterSix, parameterOne, parameterTwo);
+			} else {
+				StdDraw.line(parameterOne, parameterTwo, parameterThree, parameterFour);
+				StdDraw.line(parameterThree, parameterFour, parameterFive, parameterSix);
+				StdDraw.line(parameterFive, parameterSix, parameterOne, parameterTwo);
+			}
+		}
+
 	}
 }
